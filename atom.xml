@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Qileli.github.io</id>
     <title>Gridea</title>
-    <updated>2021-04-15T12:20:35.483Z</updated>
+    <updated>2021-04-15T12:25:50.989Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Qileli.github.io"/>
     <link rel="self" href="https://Qileli.github.io/atom.xml"/>
@@ -10,6 +10,44 @@
     <logo>https://Qileli.github.io/images/avatar.png</logo>
     <icon>https://Qileli.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[sql注入之Mysql绕过安全狗]]></title>
+        <id>https://Qileli.github.io/post/sql-zhu-ru-zhi-mysql-rao-guo-an-quan-gou/</id>
+        <link href="https://Qileli.github.io/post/sql-zhu-ru-zhi-mysql-rao-guo-an-quan-gou/">
+        </link>
+        <updated>2021-04-15T12:25:04.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="sql注入闭合检查">sql注入闭合检查</h2>
+<p>sql注入的分类有很多种分法；可以分成数字型和字符型，区别在于是否需要完整闭合。本题中由于我经验不足，试了好久才想到就是简单的双引号加括号就可以闭合了，然后再注释掉后面的内容。</p>
+<p>单引号<br>
+<a href="https://oscimg.oschina.net/oscnet/up-77649225b523e3378c33233e7f8a7adf0a1.png" title="单引号注释"><img src="https://oscimg.oschina.net/oscnet/up-77649225b523e3378c33233e7f8a7adf0a1.png" alt="单引号注释" title="单引号注释" loading="lazy"></a></p>
+<p>回显正常结果</p>
+<figure data-type="image" tabindex="1"><img src="https://oscimg.oschina.net/oscnet/up-7207eac5f53ee2c1c4bd501a9be0c9b204f.png" alt="" loading="lazy"></figure>
+<p>双引号</p>
+<p>错误回显</p>
+<figure data-type="image" tabindex="2"><img src="https://oscimg.oschina.net/oscnet/up-2dad537bee1734d24b6b59f661a6427a589.png" alt="错误回显" title="错误回显" loading="lazy"></figure>
+<p>这里其实可以简单分析一下，&quot;1 是Get请求传递的参数值，后面的 &quot;)是这里的闭合方式。</p>
+<p>双引号加括号 &quot;)(&quot; ，就把前后都闭合了。</p>
+<figure data-type="image" tabindex="3"><img src="https://oscimg.oschina.net/oscnet/up-055bdaa99e9bdee10ef05701f7e76479143.png" alt="" loading="lazy"></figure>
+<p>闭合结果</p>
+<figure data-type="image" tabindex="4"><img src="https://oscimg.oschina.net/oscnet/up-ec3da5899b2076e28afea9935d6090cf1a7.png" alt="" loading="lazy"></figure>
+<p>接着就简单添加注释，返回正确结果，后面是绕过的正题了。</p>
+<p><code>http://120.25.24.45:30626/?id=1&quot;)--+</code></p>
+<figure data-type="image" tabindex="5"><img src="https://oscimg.oschina.net/oscnet/up-6ace41757ab94ae3cb2224854a324d0e095.png" alt="" loading="lazy"></figure>
+<h2 id="绕过技巧">绕过技巧</h2>
+<p>当我们发现一个sql注入漏洞，手工注入时。步骤无非是获取数据库名，查询有那些重要的表，再查询哪种重要的字段，从而能够查询重要的数据<code>select column from table</code>。为了获取前面的关键数据，一般基本的格式是</p>
+<p><code>union select xxx from xxxx.xxx where xxx=&quot;yyy&quot; and xxx=&quot;yyy&quot;</code></p>
+<p>不同的数据库有不同的特性，操作系统的影响，程序语言的弱类型检查；所以我们要有针对性下手。</p>
+<p>本题中使用的是Mysql数据库，Ubuntu系统，Apache服务器。<br>
+在Mysql中，可以采用以下方法</p>
+<ol>
+<li>关键字被检测拦截 ------&gt;内联注释绕过 <code>/*!12342union*/</code></li>
+<li>需要空格,间隔库名表名与关键字               ------&gt; <code>%23%0a</code>,<code>%2d%2d0a</code>. 注释回车</li>
+<li>Mysql黑魔法-----&gt;<code>select {x name} from {x user}</code></li>
+</ol>
+<hr>
+<p>具体操作</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Markdown 学习]]></title>
         <id>https://Qileli.github.io/post/markdown-xue-xi/</id>

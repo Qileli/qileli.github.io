@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>Markdown 学习 | Gridea</title>
+<title>sql注入之Mysql绕过安全狗 | Gridea</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -80,99 +80,51 @@
       <div class="content-container">
         <div class="post-detail">
           
-          <h2 class="post-title">Markdown 学习</h2>
+          <h2 class="post-title">sql注入之Mysql绕过安全狗</h2>
           <div class="post-info post-detail-info">
             <span><i class="icon-calendar-outline"></i> 2021-04-15</span>
             
           </div>
           <div class="post-content">
-            <h2 id="标题">标题</h2>
-<pre><code class="language-bash"># 一级标题  ## 二级标题 最多六级标题(中间有空格)，例：# Java 
-</code></pre>
-<h1 id="java">Java</h1>
-<hr>
-<h2 id="字体">字体</h2>
-<pre><code class="language-bash">*斜体*
-**粗体**
-***粗斜体*** 
-~~删除线~~
-例如：*斜塔* **金箍棒** ~~Gold~~
-</code></pre>
-<p><em>斜塔</em><br>
-<strong>金箍棒</strong><br>
-<s>Gold</s></p>
-<hr>
-<h2 id="引用">引用</h2>
-<pre><code class="language-bash">&gt; 文本 例子：&gt; 天生我材必有用，千金散尽还复来。
-</code></pre>
-<blockquote>
-<p>天生我材必有用，千金散尽还复来。</p>
-</blockquote>
-<hr>
-<h2 id="分割线">分割线</h2>
-<pre><code class="language-bash">---
-***
-</code></pre>
-<hr>
-<hr>
-<h2 id="图片">图片</h2>
-<pre><code class="language-bash">![名称](图片路径)      注：图片可以是网络路径，也可以是本地路径
-![我的头像](https://static.oschina.net/uploads/user/2263/4527181_50.jpg?t=1588908572000)
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://static.oschina.net/uploads/user/2263/4527181_50.jpg?t=1588908572000" alt="我的头像" loading="lazy"></figure>
-<h2 id="超链接">超链接</h2>
-<pre><code class="language-bash">[名称](地址) [点击去往百度官网](www.baidu.com)
-</code></pre>
-<p><a href="https://www.baidu.com">点击去往百度官网</a></p>
-<h2 id="列表">列表</h2>
-<p>有序列表        无序列表</p>
-<pre><code class="language-bash">1. 第一步 - (减号+空格)
-2. 第二步 -
-3. 第三步 -
-</code></pre>
+            <h2 id="sql注入闭合检查">sql注入闭合检查</h2>
+<p>sql注入的分类有很多种分法；可以分成数字型和字符型，区别在于是否需要完整闭合。本题中由于我经验不足，试了好久才想到就是简单的双引号加括号就可以闭合了，然后再注释掉后面的内容。</p>
+<p>单引号<br>
+<a href="https://oscimg.oschina.net/oscnet/up-77649225b523e3378c33233e7f8a7adf0a1.png" title="单引号注释"><img src="https://oscimg.oschina.net/oscnet/up-77649225b523e3378c33233e7f8a7adf0a1.png" alt="单引号注释" title="单引号注释" loading="lazy"></a></p>
+<p>回显正常结果</p>
+<figure data-type="image" tabindex="1"><img src="https://oscimg.oschina.net/oscnet/up-7207eac5f53ee2c1c4bd501a9be0c9b204f.png" alt="" loading="lazy"></figure>
+<p>双引号</p>
+<p>错误回显</p>
+<figure data-type="image" tabindex="2"><img src="https://oscimg.oschina.net/oscnet/up-2dad537bee1734d24b6b59f661a6427a589.png" alt="错误回显" title="错误回显" loading="lazy"></figure>
+<p>这里其实可以简单分析一下，&quot;1 是Get请求传递的参数值，后面的 &quot;)是这里的闭合方式。</p>
+<p>双引号加括号 &quot;)(&quot; ，就把前后都闭合了。</p>
+<figure data-type="image" tabindex="3"><img src="https://oscimg.oschina.net/oscnet/up-055bdaa99e9bdee10ef05701f7e76479143.png" alt="" loading="lazy"></figure>
+<p>闭合结果</p>
+<figure data-type="image" tabindex="4"><img src="https://oscimg.oschina.net/oscnet/up-ec3da5899b2076e28afea9935d6090cf1a7.png" alt="" loading="lazy"></figure>
+<p>接着就简单添加注释，返回正确结果，后面是绕过的正题了。</p>
+<p><code>http://120.25.24.45:30626/?id=1&quot;)--+</code></p>
+<figure data-type="image" tabindex="5"><img src="https://oscimg.oschina.net/oscnet/up-6ace41757ab94ae3cb2224854a324d0e095.png" alt="" loading="lazy"></figure>
+<h2 id="绕过技巧">绕过技巧</h2>
+<p>当我们发现一个sql注入漏洞，手工注入时。步骤无非是获取数据库名，查询有那些重要的表，再查询哪种重要的字段，从而能够查询重要的数据<code>select column from table</code>。为了获取前面的关键数据，一般基本的格式是</p>
+<p><code>union select xxx from xxxx.xxx where xxx=&quot;yyy&quot; and xxx=&quot;yyy&quot;</code></p>
+<p>不同的数据库有不同的特性，操作系统的影响，程序语言的弱类型检查；所以我们要有针对性下手。</p>
+<p>本题中使用的是Mysql数据库，Ubuntu系统，Apache服务器。<br>
+在Mysql中，可以采用以下方法</p>
 <ol>
-<li>第一步</li>
-<li>第二步</li>
-<li>第三步</li>
+<li>关键字被检测拦截 ------&gt;内联注释绕过 <code>/*!12342union*/</code></li>
+<li>需要空格,间隔库名表名与关键字               ------&gt; <code>%23%0a</code>,<code>%2d%2d0a</code>. 注释回车</li>
+<li>Mysql黑魔法-----&gt;<code>select {x name} from {x user}</code></li>
 </ol>
-<ul>
-<li>汇编语言</li>
-<li>计算机网络</li>
-<li>操作系统</li>
-</ul>
 <hr>
-<h2 id="表格">表格</h2>
-<figure data-type="image" tabindex="2"><img src="https://oscimg.oschina.net/oscnet/up-94a1a78279c209a0cee904f6a06e8b04e01.png" alt="表格规范" loading="lazy"></figure>
-<table>
-<thead>
-<tr>
-<th>姓名</th>
-<th>身高</th>
-<th>年龄</th>
-<th>服刑年数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>张三</td>
-<td>175</td>
-<td>20</td>
-<td>10</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="代码">代码</h2>
-<figure data-type="image" tabindex="3"><img src="https://oscimg.oschina.net/oscnet/up-917253b2b5982c05f4a6648347f51b6f686.png" alt="tupian" loading="lazy"></figure>
+<p>具体操作</p>
 
           </div>
         </div>
 
         
           <div class="next-post">
-            <a class="purple-link" href="https://Qileli.github.io/post/hello-gridea/">
+            <a class="purple-link" href="https://Qileli.github.io/post/markdown-xue-xi/">
               <h3 class="post-title">
-                下一篇：Hello Gridea
+                下一篇：Markdown 学习
               </h3>
             </a>
           </div>
