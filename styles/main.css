@@ -766,6 +766,10 @@ a {
         margin-left: 20%;
       }
     
+      .sidebar .top-container .site-nav {
+        color: #ced4da;
+      }
+    
       .post-item .right .feature-container {
         border-radius: 5px;
       }
