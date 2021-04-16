@@ -1,101 +1,92 @@
+
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+<meta charset="utf-8" >
+
 <title>sql注入之Mysql绕过安全狗 | iroman&#39;s blog</title>
-<link rel="shortcut icon" href="https://qileli.github.io/favicon.ico?v=1618574779314">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<meta name="description" content="记录学习与生活">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://qileli.github.io/favicon.ico?v=1618574802679">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://qileli.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="sql注入之Mysql绕过安全狗 | iroman&#39;s blog - Atom Feed" href="https://qileli.github.io/atom.xml">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="sql注入闭合检查
-sql注入的分类有很多种分法；可以分成数字型和字符型，区别在于是否需要完整闭合。本题中由于我经验不足，试了好久才想到就是简单的双引号加括号就可以闭合了，然后再注释掉后面的内容。
-单引号
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
-回显正常结果
 
-双引号
-错误回显..." />
-    <meta name="keywords" content="" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
-    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
   </head>
   <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://qileli.github.io">
-  <img class="avatar" src="https://qileli.github.io/images/avatar.png?v=1618574779314" alt="">
-  </a>
-  <h1 class="site-title">
-    iroman&#39;s blog
-  </h1>
-  <p class="site-description">
-    记录学习与生活
-  </p>
-  <div class="menu-container">
-    
-      
-        <a href="/" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="/post/about" class="menu">
-          关于
-        </a>
-      
-    
-  </div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://qileli.github.io">
+        <img class="avatar" src="https://qileli.github.io/images/avatar.png?v=1618574802679" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://qileli.github.io">
+        <h1 class="site-title">iroman&#39;s blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
   </div>
 </div>
 
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
         <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              sql注入之Mysql绕过安全狗
-            </h2>
-            <div class="post-info">
-              <span>
-                2021-04-15
-              </span>
-              <span>
-                2 min read
-              </span>
-              
-            </div>
+          
+          <h2 class="post-title">sql注入之Mysql绕过安全狗</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2021-04-15</span>
             
-            <div class="post-content-wrapper">
-              <div class="post-content">
-                <h2 id="sql注入闭合检查">sql注入闭合检查</h2>
+          </div>
+          <div class="post-content">
+            <h2 id="sql注入闭合检查">sql注入闭合检查</h2>
 <p>sql注入的分类有很多种分法；可以分成数字型和字符型，区别在于是否需要完整闭合。本题中由于我经验不足，试了好久才想到就是简单的双引号加括号就可以闭合了，然后再注释掉后面的内容。</p>
 <p>单引号<br>
 <a href="https://oscimg.oschina.net/oscnet/up-77649225b523e3378c33233e7f8a7adf0a1.png" title="单引号注释"><img src="https://oscimg.oschina.net/oscnet/up-77649225b523e3378c33233e7f8a7adf0a1.png" alt="单引号注释" title="单引号注释" loading="lazy"></a></p>
@@ -126,84 +117,57 @@ sql注入的分类有很多种分法；可以分成数字型和字符型，区�
 <hr>
 <p>具体操作</p>
 
-              </div>
-              <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#sql%E6%B3%A8%E5%85%A5%E9%97%AD%E5%90%88%E6%A3%80%E6%9F%A5">sql注入闭合检查</a></li>
-<li><a href="#%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7">绕过技巧</a></li>
-</ul>
-</li>
-</ul>
-
-              </div>
-            </div>
-          </article>
+          </div>
         </div>
 
         
           <div class="next-post">
-            <div class="next">下一篇</div>
-            <a href="https://qileli.github.io/markdown-xue-xi/">
+            <a class="purple-link" href="https://qileli.github.io/markdown-xue-xi/">
               <h3 class="post-title">
-                Markdown 学习
+                下一篇：Markdown 学习
               </h3>
             </a>
           </div>
-        
+          
+      </div>
 
-        
+      
 
-        <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-  <a class="rss" href="https://qileli.github.io/atom.xml" target="_blank">
-    <i class="ri-rss-line"></i> RSS
-  </a>
+      <div class="site-footer">
+  <div class="slogan">记录学习与生活</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://qileli.github.io/atom.xml" target="_blank">RSS</a>
 </div>
 
-      </div>
+
     </div>
+    <script type="application/javascript">
 
-    <script>
-      hljs.initHighlightingOnLoad()
+hljs.initHighlightingOnLoad()
 
-      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
-      // This should probably be throttled.
-      // Especially because it triggers during smooth scrolling.
-      // https://lodash.com/docs/4.17.10#throttle
-      // You could do like...
-      // window.addEventListener("scroll", () => {
-      //    _.throttle(doThatStuff, 100);
-      // });
-      // Only not doing it here to keep this Pen dependency-free.
+</script>
 
-      window.addEventListener("scroll", event => {
-        let fromTop = window.scrollY;
 
-        mainNavLinks.forEach((link, index) => {
-          let section = document.getElementById(decodeURI(link.hash).substring(1));
-          let nextSection = null
-          if (mainNavLinks[index + 1]) {
-            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
-          }
-          if (section.offsetTop <= fromTop) {
-            if (nextSection) {
-              if (nextSection.offsetTop > fromTop) {
-                link.classList.add("current");
-              } else {
-                link.classList.remove("current");    
-              }
-            } else {
-              link.classList.add("current");
-            }
-          } else {
-            link.classList.remove("current");
-          }
-        });
-      });
 
-    </script>
+
   </body>
 </html>
