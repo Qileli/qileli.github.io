@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qileli.github.io</id>
     <title>iroman&apos;s blog</title>
-    <updated>2021-04-16T14:33:55.247Z</updated>
+    <updated>2021-04-21T14:54:48.168Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qileli.github.io"/>
     <link rel="self" href="https://qileli.github.io/atom.xml"/>
@@ -10,6 +10,17 @@
     <logo>https://qileli.github.io/images/avatar.png</logo>
     <icon>https://qileli.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, iroman&apos;s blog</rights>
+    <entry>
+        <title type="html"><![CDATA[常用工具]]></title>
+        <id>https://qileli.github.io/6b_BQNby3/</id>
+        <link href="https://qileli.github.io/6b_BQNby3/">
+        </link>
+        <updated>2021-04-21T14:51:05.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="信息收集">信息收集</h1>
+<h2 id="域名">域名</h2>
+<p><a href="https://phpinfo.me/domain/">子域名枚举</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[sql注入之Mysql绕过安全狗]]></title>
         <id>https://qileli.github.io/sql-zhu-ru-zhi-mysql-rao-guo-an-quan-gou/</id>
