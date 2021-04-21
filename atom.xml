@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qileli.github.io</id>
     <title>iroman&apos;s blog</title>
-    <updated>2021-04-21T15:39:37.811Z</updated>
+    <updated>2021-04-21T15:42:40.608Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qileli.github.io"/>
     <link rel="self" href="https://qileli.github.io/atom.xml"/>
@@ -12,6 +12,15 @@
     <logo>https://qileli.github.io/images/avatar.png</logo>
     <icon>https://qileli.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, iroman&apos;s blog</rights>
+    <entry>
+        <title type="html"><![CDATA[大佬见解]]></title>
+        <id>https://qileli.github.io/yvtbLjGXm/</id>
+        <link href="https://qileli.github.io/yvtbLjGXm/">
+        </link>
+        <updated>2021-04-21T15:39:52.000Z</updated>
+        <content type="html"><![CDATA[<p>绝大多数人拼的始终还是努力，跟天赋毫无关系，那么你不通宵挖漏洞怎么和别人拼？当然就不用说加班了。。。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[逻辑漏洞]]></title>
         <id>https://qileli.github.io/q5hyX5Yb-/</id>
