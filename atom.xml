@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qileli.github.io</id>
     <title>iroman&apos;s blog</title>
-    <updated>2021-04-22T16:24:06.090Z</updated>
+    <updated>2021-04-22T16:25:09.530Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qileli.github.io"/>
     <link rel="self" href="https://qileli.github.io/atom.xml"/>
@@ -10,44 +10,6 @@
     <logo>https://qileli.github.io/images/avatar.png</logo>
     <icon>https://qileli.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, iroman&apos;s blog</rights>
-    <entry>
-        <title type="html"><![CDATA[需要掌握的技能                                                ]]></title>
-        <id>https://qileli.github.io/sKZzgAgP0/</id>
-        <link href="https://qileli.github.io/sKZzgAgP0/">
-        </link>
-        <updated>2021-04-22T15:17:44.000Z</updated>
-        <content type="html"><![CDATA[<ol>
-<li>OWASP Top10
-<ul>
-<li>SQL注入</li>
-<li>XSS跨站脚本攻击</li>
-<li>CSRF客户端请求伪造</li>
-<li>SSRF服务端请求伪造</li>
-<li>文件上传</li>
-<li>文件包含</li>
-<li>XXExml实体攻击</li>
-<li>反序列化</li>
-<li>命令执行</li>
-<li>逻辑漏洞</li>
-<li>权限管理漏洞</li>
-</ul>
-</li>
-<li>基本工具
-<ul>
-<li>Burpsuite 正版好贵啊，CE版功能少，只能 PJ版 还有其插件。ZAP 开源不会用，扫描</li>
-<li>sqlmap SQL注入</li>
-<li>BeEF</li>
-<li>nmap , masscan 端口扫描，服务探测</li>
-<li>hydra 爆破工具</li>
-<li>nc</li>
-<li>Metasploit</li>
-<li>nikto</li>
-<li>dirbuster，dirb，御剑</li>
-</ul>
-</li>
-</ol>
-]]></content>
-    </entry>
     <entry>
         <title type="html"><![CDATA[大佬见解]]></title>
         <id>https://qileli.github.io/yvtbLjGXm/</id>
