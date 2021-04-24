@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://qileli.github.io</id>
     <title>iroman&apos;s blog</title>
-    <updated>2021-04-23T00:42:29.320Z</updated>
+    <updated>2021-04-24T02:40:03.162Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://qileli.github.io"/>
     <link rel="self" href="https://qileli.github.io/atom.xml"/>
@@ -10,6 +10,29 @@
     <logo>https://qileli.github.io/images/avatar.png</logo>
     <icon>https://qileli.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, iroman&apos;s blog</rights>
+    <entry>
+        <title type="html"><![CDATA[waf]]></title>
+        <id>https://qileli.github.io/BqOe-znIw/</id>
+        <link href="https://qileli.github.io/BqOe-znIw/">
+        </link>
+        <updated>2021-04-23T15:02:51.000Z</updated>
+        <content type="html"><![CDATA[<p>另类%u特性(ASP+IIS)</p>
+<p>该漏洞主要利用的是unicode在iis解析之后会被转换成multibyte,但是转换的过程中可能出现: 多个widechar会有可能转换为同一个字符。 打个比方就是譬如select中的e对应的unicode为%u0065,但是%u00f0同样会被转换成为e。s%u0065lect-&gt;select s%u00f0lect-&gt;selectWAF层可能能识别s%u0065lect的形式,但是很有可能识别不了s%u00f0lect的形式。这样就可以利用起来做WAF的绕过。常见三个关键字(union+select+from)的测试情况:</p>
+<p>s%u0045lect = s%u0065lect = %u00f0lect</p>
+<p>u --&gt; %u0055 --&gt; %u0075</p>
+<p>n --&gt;%u004e --&gt; %u006e</p>
+<p>i --&gt;%u0049 --&gt; %u0069</p>
+<p>o --&gt;%u004f --&gt; %u006f --&gt;%u00ba</p>
+<p>s --&gt;%u0053 --&gt; %u0073</p>
+<p>l --&gt;%u004c --&gt; %u006c</p>
+<p>e --&gt;%u0045 --&gt; %u0065--&gt;%u00f0</p>
+<p>c --&gt;%u0043 --&gt; %u0063</p>
+<p>t --&gt;%u0054 --&gt;%u0074 --&gt;%u00de --&gt;%u00fe</p>
+<p>f --&gt;%u0046 --&gt;%u0066</p>
+<p>r --&gt;%u0052 --&gt;%u0072</p>
+<p>m --&gt;%u004d --&gt;%u006d</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[需要掌握的技能                                                ]]></title>
         <id>https://qileli.github.io/sKZzgAgP0/</id>
@@ -55,6 +78,10 @@
         </link>
         <updated>2021-04-21T15:39:52.000Z</updated>
         <content type="html"><![CDATA[<p>绝大多数人拼的始终还是努力，跟天赋毫无关系，那么你不通宵挖漏洞怎么和别人拼？当然就不用说加班了。。。</p>
+<blockquote>
+<p>没有挖不到的漏洞，只有不耐心的黑客。<br>
+心细挖天下，粗心是傻瓜。</p>
+</blockquote>
 ]]></content>
     </entry>
     <entry>
@@ -76,9 +103,11 @@
         <content type="html"><![CDATA[<h1 id="信息收集">信息收集</h1>
 <h2 id="域名">域名</h2>
 <p><a href="https://phpinfo.me/domain/">在线子域名查询</a><br>
-<a href="https://crt.sh/">crt.sh | Certificate Search</a></p>
+<a href="https://crt.sh/">crt.sh | Certificate Search</a><br>
+<a href="https://censys.io/">Censys</a></p>
 <h2 id="真实ip">真实IP</h2>
-<p>同IP网站查询,C段查询,IP反查域名,C段旁注,旁注工具</p>
+<p>同IP网站查询,C段查询,IP反查域名,C段旁注,旁注工具<br>
+<a href="http://ping.chinaz.com/">多个地点Ping服务器,网站测速 - 站长工具</a></p>
 <h2 id="端口扫描及服务探测">端口扫描及服务探测</h2>
 <h2 id="指纹识别">指纹识别</h2>
 <p><a href="http://finger.tidesec.com/">TideFinger  潮汐指纹</a><br>
@@ -88,7 +117,7 @@
 <a href="https://www.yunsee.cn/">云悉互联网WEB资产在线梳理|在线CMS指纹识别平台 - 云悉安全平台</a></p>
 <hr>
 <h2 id="网络空间引擎">网络空间引擎</h2>
-<p><a href="https://fofa.so/">网络空间测绘，网络空间安全搜索引擎，网络空间搜索引擎，安全态势感知 - FOFA网络空间测绘系统</a><br>
+<p><a href="https://fofa.so/">FOFA网络空间测绘系统</a><br>
 <a href="https://www.bountyteam.com/laboratory">sumap-全球网络空间超级雷达</a><br>
 <a href="https://www.shodan.io/">shodan</a><br>
 <a href="https://www.zoomeye.org/">ZoomEye - Cyberspace Search Engine</a></p>
